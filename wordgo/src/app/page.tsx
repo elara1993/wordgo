@@ -183,13 +183,16 @@ export default function HomePage() {
         <motion.div variants={itemVariants}>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">词库分类</h3>
           <div className="grid grid-cols-3 gap-3">
-            {(categories.length > 0 ? categories.slice(0, 6) : [
+            {(categories.length > 0 ? categories.slice(0, 9) : [
               { name: "fruit", label: "水果", emoji: "🍎", count: 0 },
               { name: "animal", label: "动物", emoji: "🐶", count: 0 },
               { name: "color", label: "颜色", emoji: "🎨", count: 0 },
               { name: "number", label: "数字", emoji: "🔢", count: 0 },
               { name: "family", label: "家庭", emoji: "👨‍👩‍👧", count: 0 },
               { name: "food", label: "食物", emoji: "🍕", count: 0 },
+              { name: "weather", label: "天气", emoji: "🌤️", count: 0 },
+              { name: "mood", label: "心情", emoji: "😊", count: 0 },
+              { name: "sport", label: "运动", emoji: "⚽", count: 0 },
             ]).map((cat) => (
               <motion.button
                 key={cat.name}

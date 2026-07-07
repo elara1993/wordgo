@@ -7,14 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 
 const categories = [
-  { name: "全部", emoji: "📚", count: 100 },
+  { name: "全部", emoji: "📚", count: 130 },
   { name: "水果", emoji: "🍎", count: 15 },
   { name: "动物", emoji: "🐶", count: 15 },
   { name: "颜色", emoji: "🎨", count: 10 },
   { name: "数字", emoji: "🔢", count: 10 },
   { name: "家庭", emoji: "👨‍👩‍👧", count: 10 },
   { name: "食物", emoji: "🍕", count: 20 },
-  { name: "通用", emoji: "✨", count: 20 },
+  { name: "天气", emoji: "🌤️", count: 10 },
+  { name: "心情", emoji: "😊", count: 10 },
+  { name: "运动", emoji: "⚽", count: 10 },
+  { name: "通用", emoji: "✨", count: 19 },
 ];
 
 const mockWords = [

@@ -96,4 +96,4 @@ export interface Sentence {
 }
 
 // ==================== Category Types ====================
-export type WordCategory = 'fruit' | 'animal' | 'color' | 'number' | 'family' | 'food' | 'general';
+export type WordCategory = 'fruit' | 'animal' | 'color' | 'number' | 'family' | 'food' | 'general' | 'weather' | 'mood' | 'sport';

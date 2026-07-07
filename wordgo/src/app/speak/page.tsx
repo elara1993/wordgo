@@ -17,6 +17,9 @@ const categories = [
   { name: "number", emoji: "🔢", label: "数字" },
   { name: "family", emoji: "👨‍👩‍👧", label: "家庭" },
   { name: "food", emoji: "🍕", label: "食物" },
+  { name: "weather", emoji: "🌤️", label: "天气" },
+  { name: "mood", emoji: "😊", label: "心情" },
+  { name: "sport", emoji: "⚽", label: "运动" },
   { name: "general", emoji: "✨", label: "通用" },
 ];
 
