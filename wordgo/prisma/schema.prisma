@@ -1,0 +1,80 @@
+// ==================== WordGo Database Schema ====================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// ==================== User Model ====================
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String?  @unique
+  avatar    String?
+  streak    Int      @default(0)
+  totalXP   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  wordProgresses WordProgress[]
+  dailyStats     DailyStat[]
+}
+
+// ==================== Word Model ====================
+model Word {
+  id          String    @id @default(cuid())
+  word        String    @unique
+  phonetic    String?
+  meaning     String
+  image       String?
+  example     String?
+  audioUrl    String?
+  level       Int       @default(1)
+  category    String    @default("general")
+  difficulty  String    @default("easy")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  wordProgresses WordProgress[]
+}
+
+// ==================== WordProgress Model ====================
+model WordProgress {
+  id           String   @id @default(cuid())
+  userId       String
+  wordId       String
+  correct      Int      @default(0)
+  wrong        Int      @default(0)
+  mastery      Float    @default(0.0)
+  lastReview   DateTime?
+  nextReview   DateTime?
+  reviewCount  Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word    Word    @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+}
+
+// ==================== DailyStat Model ====================
+model DailyStat {
+  id          String   @id @default(cuid())
+  userId      String
+  date        String
+  learned     Int      @default(0)
+  reviewed    Int      @default(0)
+  correct     Int      @default(0)
+  wrong       Int      @default(0)
+  xpEarned    Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+}

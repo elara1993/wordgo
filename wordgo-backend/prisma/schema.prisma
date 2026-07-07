@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String?  @unique
+  avatar    String?
+  totalXP   Int      @default(0)
+  streak    Int      @default(0)
+  level     Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  progress WordProgress[]
+  stats    DailyStat[]
+}
+
+model Word {
+  id          String           @id @default(cuid())
+  word        String           @unique
+  phonetic    String
+  meaning     String
+  image       String?
+  example     String?
+  audio       String?
+  level       Int              @default(1)
+  category    String
+  difficulty  Float            @default(1.0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  progress    WordProgress[]
+}
+
+model WordProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  wordId      String
+  correct     Int      @default(0)
+  wrong       Int      @default(0)
+  mastery     Float    @default(0.0)
+  lastReview  DateTime?
+  nextReview  DateTime?
+  reviewCount Int      @default(0)
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word  Word  @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+}
+
+model DailyStat {
+  id        String   @id @default(cuid())
+  userId    String
+  date      String   // YYYY-MM-DD
+  learned   Int      @default(0)
+  reviewed  Int      @default(0)
+  correct   Int      @default(0)
+  xpEarned  Int      @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+}
