@@ -9,8 +9,10 @@ import {
   CheckCircleIcon,
   XCircleIcon,
   BookmarkIcon,
+  PlusCircleIcon,
+  StarIcon,
 } from "@heroicons/react/24/outline";
-import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
+import { BookmarkIcon as BookmarkSolid, StarIcon as StarSolid } from "@heroicons/react/24/solid";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useLearningStore, useTodayStatsStore, submitReview } from "@/store/learningStore";
@@ -83,6 +85,26 @@ function LearnPageContent() {
     advancePhase();
   }, [currentWord, advancePhase, incrementCorrect, addXPToday]);
 
+  const [isInWordbook, setIsInWordbook] = useState(false);
+  const [addingToWordbook, setAddingToWordbook] = useState(false);
+
+  const handleAddToWordbook = useCallback(async () => {
+    if (!currentWord || isInWordbook) return;
+    setAddingToWordbook(true);
+    try {
+      const res = await fetch("/api/wordbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wordId: currentWord.id }),
+      });
+      if (res.ok) setIsInWordbook(true);
+    } catch {
+      // ignore
+    } finally {
+      setAddingToWordbook(false);
+    }
+  }, [currentWord, isInWordbook]);
+
   const handleDontKnow = useCallback(() => {
     setShowHint(true);
   }, []);
@@ -131,6 +153,7 @@ function LearnPageContent() {
       // Reset for next word
       setIsRecognized(false);
       setIsBookmarked(false);
+      setIsInWordbook(false);
       setDictationText("");
       setIsCorrect(null);
       setShowHint(false);
@@ -264,6 +287,30 @@ function LearnPageContent() {
                     "{currentWord.example}"
                   </p>
                 )}
+              </div>
+
+              {/* Add to Wordbook */}
+              <div className="flex justify-center">
+                <button
+                  onClick={handleAddToWordbook}
+                  disabled={isInWordbook || addingToWordbook}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                    isInWordbook
+                      ? "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 cursor-default"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 hover:text-yellow-600 dark:hover:text-yellow-400"
+                  }`}
+                >
+                  {isInWordbook ? (
+                    <StarSolid className="w-5 h-5" />
+                  ) : (
+                    <PlusCircleIcon className="w-5 h-5" />
+                  )}
+                  {isInWordbook
+                    ? "已加入生词本"
+                    : addingToWordbook
+                    ? "添加中..."
+                    : "加入生词本"}
+                </button>
               </div>
 
               {/* Action Buttons */}

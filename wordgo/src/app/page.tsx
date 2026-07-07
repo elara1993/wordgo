@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PlayIcon, ChatBubbleLeftRightIcon, ChartBarIcon, FireIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { PlayIcon, ChatBubbleLeftRightIcon, BookmarkSquareIcon, ChartBarIcon, FireIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { useLearningStore, useTodayStatsStore, useUserStore } from "@/store/learningStore";
@@ -137,27 +137,34 @@ export default function HomePage() {
           </div>
         </motion.div>
 
-        {/* Speak Practice Entry */}
-        <motion.div variants={itemVariants}>
-          <button
-            onClick={() => router.push("/speak")}
-            className="w-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl p-5 text-white shadow-md hover:shadow-lg transition-shadow text-left"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-bold mb-1">🗣️ 我会说</h2>
-                <p className="text-sm text-white/80">用英语说出完整的句子</p>
+        {/* Quick Entry Cards */}
+        <div className="grid grid-cols-2 gap-3">
+          {/* Speak Entry */}
+          <motion.div variants={itemVariants}>
+            <button
+              onClick={() => router.push("/speak")}
+              className="w-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl p-4 text-white shadow-md hover:shadow-lg transition-shadow text-left h-full"
+            >
+              <div className="flex flex-col justify-between h-full">
+                <p className="text-lg font-bold mb-1">🗣️ 我会说</p>
+                <p className="text-xs text-white/70">说出完整句子</p>
               </div>
-              <motion.div
-                className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center"
-                whileHover={{ scale: 1.15, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChatBubbleLeftRightIcon className="w-6 h-6" />
-              </motion.div>
-            </div>
-          </button>
-        </motion.div>
+            </button>
+          </motion.div>
+
+          {/* Wordbook Entry */}
+          <motion.div variants={itemVariants}>
+            <button
+              onClick={() => router.push("/wordbook")}
+              className="w-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl p-4 text-white shadow-md hover:shadow-lg transition-shadow text-left h-full"
+            >
+              <div className="flex flex-col justify-between h-full">
+                <p className="text-lg font-bold mb-1">📖 生词本</p>
+                <p className="text-xs text-white/70">查看已收藏的单词</p>
+              </div>
+            </button>
+          </motion.div>
+        </div>
 
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 gap-4">

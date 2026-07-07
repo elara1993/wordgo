@@ -95,5 +95,14 @@ export interface Sentence {
   word?: Word;
 }
 
+// ==================== WordBook ====================
+export interface WordBook {
+  id: string;
+  userId: string;
+  wordId: string;
+  createdAt: Date;
+  word?: Word;
+}
+
 // ==================== Category Types ====================
 export type WordCategory = 'fruit' | 'animal' | 'color' | 'number' | 'family' | 'food' | 'general' | 'weather' | 'mood' | 'sport';

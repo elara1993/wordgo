@@ -22,6 +22,7 @@ model User {
 
   wordProgresses WordProgress[]
   dailyStats     DailyStat[]
+  wordBooks      WordBook[]
 }
 
 // ==================== Word Model ====================
@@ -41,6 +42,7 @@ model Word {
 
   wordProgresses WordProgress[]
   sentences      Sentence[]
+  wordBooks      WordBook[]
 }
 
 // ==================== Sentence Model ====================
@@ -56,6 +58,20 @@ model Sentence {
   word      Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@index([wordId])
+}
+
+// ==================== WordBook Model ====================
+model WordBook {
+  id        String   @id @default(cuid())
+  userId    String
+  wordId    String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word      Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@index([userId])
 }
 
 // ==================== WordProgress Model ====================
