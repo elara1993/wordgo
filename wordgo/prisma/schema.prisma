@@ -40,6 +40,22 @@ model Word {
   updatedAt   DateTime  @updatedAt
 
   wordProgresses WordProgress[]
+  sentences      Sentence[]
+}
+
+// ==================== Sentence Model ====================
+model Sentence {
+  id        String   @id @default(cuid())
+  wordId    String
+  text      String
+  translation String?
+  audioUrl  String?
+  level     Int      @default(1)
+  createdAt DateTime @default(now())
+
+  word      Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@index([wordId])
 }
 
 // ==================== WordProgress Model ====================

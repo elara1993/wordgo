@@ -83,5 +83,17 @@ export interface LearningResult {
   duration: number;
 }
 
+// ==================== Sentence Entity ====================
+export interface Sentence {
+  id: string;
+  wordId: string;
+  text: string;
+  translation: string | null;
+  audioUrl: string | null;
+  level: number;
+  createdAt: Date;
+  word?: Word;
+}
+
 // ==================== Category Types ====================
 export type WordCategory = 'fruit' | 'animal' | 'color' | 'number' | 'family' | 'food' | 'general';

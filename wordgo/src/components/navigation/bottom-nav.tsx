@@ -1,6 +1,7 @@
-import { HomeIcon, BookOpenIcon, ClockIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, BookOpenIcon, ChatBubbleLeftRightIcon, ClockIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { HomeIcon as HomeSolid } from "@heroicons/react/24/solid";
 import { BookOpenIcon as BookSolid } from "@heroicons/react/24/solid";
+import { ChatBubbleLeftRightIcon as ChatSolid } from "@heroicons/react/24/solid";
 import { ClockIcon as ClockSolid } from "@heroicons/react/24/solid";
 import { UserCircleIcon as UserSolid } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -18,6 +19,12 @@ const navItems = [
     href: "/dictionary",
     icon: BookOpenIcon,
     solidIcon: BookSolid,
+  },
+  {
+    label: "我会说",
+    href: "/speak",
+    icon: ChatBubbleLeftRightIcon,
+    solidIcon: ChatSolid,
   },
   {
     label: "复习",
