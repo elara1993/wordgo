@@ -97,9 +97,14 @@ function LearnPageContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ wordId: currentWord.id }),
       });
-      if (res.ok) setIsInWordbook(true);
-    } catch {
-      // ignore
+      const data = await res.json();
+      if (res.ok) {
+        setIsInWordbook(true);
+      } else {
+        console.error("加入生词本失败:", data.error);
+      }
+    } catch (err) {
+      console.error("加入生词本请求异常:", err);
     } finally {
       setAddingToWordbook(false);
     }
