@@ -38,6 +38,12 @@ pnpm-debug.log*
 coverage/
 .nyc_output/
 
+# Database (MySQL is used, ignore SQLite files)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
 # Misc
 *.tsbuildinfo
 next-env.d.ts
