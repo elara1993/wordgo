@@ -131,7 +131,7 @@ export default function StudyTimer({ children }: { children: React.ReactNode }) 
         >
           <div className="text-center mb-6">
             <div className="text-5xl mb-3">🛑</div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">学习时间到！</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">小朋友，需要休息一下眼睛哦~ 🛑</h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               你已经学习了 {LIMIT_MINUTES} 分钟，休息一下眼睛吧～
             </p>
