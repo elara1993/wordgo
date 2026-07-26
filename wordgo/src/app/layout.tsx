@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import StudyTimer from "@/components/study/StudyTimer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
           enableSystem
           storageKey="wordgo-theme"
         >
-          {children}
+          <StudyTimer>{children}</StudyTimer>
         </ThemeProvider>
       </body>
     </html>
